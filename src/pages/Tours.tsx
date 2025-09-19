@@ -78,7 +78,7 @@ const Tours: React.FC = () => {
 				console.log("Picnic tours (filtered):", picnic);
 
 				setShortTours(short);
-				setPicnicTours(picnic);
+				  setPicnicTours(picnic);
 				 setLoading(false);
    
 			})
@@ -211,13 +211,9 @@ setLoading(false);
 					<div className="tours-grid">
 					
 						{
-// 						loading ? (
-//   <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
-//         <FontAwesomeIcon icon={faSpinner} spin size="3x" />
-//       </div>
-// ) :
+
 						
-						
+					
 					
 						(
 							shortTours.map((tour) => (

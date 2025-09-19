@@ -53,7 +53,7 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
 
   const fetchTours = async () => {
     // Don't fetch if we already have data
-    if (tours.length > 0) {
+    if (tours.length > 0 && popularTours.length > 0) {
       return;
     }
 

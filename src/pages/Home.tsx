@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Users, Star, Leaf, Camera, Mountain, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTours } from '../context/TourContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPersonBiking } from '@fortawesome/free-solid-svg-icons';
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { popularTours, loading, error } = useTours();
+  const { popularTours, error,fetchTours,loading } = useTours();
+    // const [loading, setLoading] = useState(true);
+
 
 
   useEffect(() => {
@@ -27,7 +31,13 @@ const Home: React.FC = () => {
     animatedElements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+
+       if (popularTours.length === 0) {
+      console.log('empty');
+      fetchTours();
+     
+    }
+  }, [popularTours, fetchTours]);
 
   // Data fetching is now handled by TourContext
 
@@ -38,6 +48,7 @@ const Home: React.FC = () => {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
+  
   }, []);
 
   const heroSlides = [
@@ -105,44 +116,7 @@ const Home: React.FC = () => {
     }
   ];
 
-  const picnics = [
-    {
-      id: 1,
-      name: "Idalgashinna",
-      duration: "1 day",
-      difficulty: "Easy",
-      price: "$100",
-      image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
-      rating: 5,
-      reviews: 89,
-      description: "Ride through misty forests and mountain ridges on an unforgettable eco-bike journey to scenic Idalgashinna.",
-      highlights: ["Mountain railway views", "Scenic picnic spot", "Tea plantation trails", "Historic railway bridge"]
-    },
-    {
-      id: 2,
-      name: "Bambaragala Pathana",
-      duration: "1 day",
-      difficulty: "Moderate",
-      price: "$100",
-      image: "https://images.pexels.com/photos/1029604/pexels-photo-1029604.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
-      rating: 5,
-      reviews: 124,
-      description: "Pedal through grassy plains and wide-open skies — Bambaragala Pathana offers raw beauty and peaceful escapes.",
-      highlights: ["Grassy plains", "Open sky views", "Peaceful landscapes", "Photography spots"]
-    },
-    {
-      id: 3,
-      name: "Lipton's Seat",
-      duration: "1 day",
-      difficulty: "Easy",
-      price: "$100",
-      image: "https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
-      rating: 5,
-      reviews: 156,
-      description: "Cycle the legendary trail Sir Lipton once walked — now with pedal-assist ease and panoramic tea estate views.",
-      highlights: ["360° mountain views", "Tea estate picnic", "Historic significance", "Panoramic views"]
-    }
-  ];
+ 
 
   const testimonials = [
     {
@@ -169,6 +143,33 @@ const Home: React.FC = () => {
   ];
 
   return (
+    <>
+       {loading ? (
+         // Full-page spinner
+         <div style={{
+           display: "flex",
+           justifyContent: "center",
+           alignItems: "center",
+           height: "100vh",
+           width: "100vw",
+           position: "fixed",
+           top: 0,
+           left: 0,
+           backgroundColor: "#fff", // optional: can use rgba(0,0,0,0.1) for overlay effect
+           zIndex: 9999,
+         }}>
+    <FontAwesomeIcon icon={faPersonBiking} size="4x" className="loading-icon"/>
+           {/* <FontAwesomeIcon icon={faSpinner} spin size="4x" /> */}
+         </div>
+       )
+        : (
+
+
+
+
+		
+		<>
+
     <div>
       {/* Hero Carousel Section */}
       <section className="hero-carousel">
@@ -184,7 +185,7 @@ const Home: React.FC = () => {
               <div className="hero-content">
                 <h1 className="carousel-main-heading fade-in">{slide.mainHeading}</h1>
                 <h2 className="carousel-sub-heading fade-in">{slide.subHeading}</h2>
-                <p className="carousel-subtitle fade-in">{slide.subtitle}</p>
+                {/* <p className="carousel-subtitle fade-in">{slide.subtitle}</p> */}
                 <div className="cta-buttons fade-in">
                   <Link to={slide.buttonLink} className="btn btn-primary btn-large">
                     {slide.buttonText}
@@ -452,6 +453,9 @@ const Home: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
+			  )}
+    </>
   );
 };
 
