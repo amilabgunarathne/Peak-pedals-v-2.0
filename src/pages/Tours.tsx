@@ -28,7 +28,28 @@ interface Tour {
 const Tours: React.FC = () => {
 	const [shortTours, setShortTours] = useState<Tour[]>([]);
 	const [picnicTours, setPicnicTours] = useState<Tour[]>([]);
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		// Animation on scroll
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+			});
+		}, observerOptions);
+
+		const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+		animatedElements.forEach(el => observer.observe(el));
+
+		return () => observer.disconnect();
+	}, []);
 
 	useEffect(() => {
 		// Animation on scroll
@@ -141,23 +162,36 @@ setLoading(false);
 					backgroundRepeat: 'no-repeat',
 					position: 'relative',
 					display: 'flex',
-					alignItems: 'center',
+					alignItems: 'flex-end',
 					justifyContent: 'center',
-					
+					paddingBottom: '100px'
 				}}
 			>
 				<div style={{
-					background: 'rgba(0,0,0,0.4)',
-					color: 'white',
-					padding: '2rem 3rem',
-					borderRadius: '1rem',
-					textAlign: 'center',
-					maxWidth: '90%',
-					fontSize: '1.5rem',
-					fontWeight: 500
-				}}>
-					Choose from our carefully curated collection of electric bike adventures<br />
-					through Sri Lanka's stunning hill country
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					background: 'rgba(0, 0, 0, 0.3)'
+				}}></div>
+				<div className="hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+					<h1 className="carousel-main-heading fade-in">CHOOSE FROM OUR CAREFULLY CURATED COLLECTION OF ELECTRIC BIKE ESCAPES</h1>
+					{/* <h2 className="carousel-sub-heading fade-in">OF ELECTRIC BIKE ADVENTURES THROUGH SRI LANKA'S STUNNING HILL COUNTRY</h2> */}
+					<div className="cta-buttons fade-in" style={{ marginTop: '2rem' }}>
+						<button 
+							className="btn btn-primary btn-large"
+							onClick={() => document.getElementById('short-escapes')?.scrollIntoView({ behavior: 'smooth' })}
+						>
+							Short Escapes
+						</button>
+						<button 
+							className="btn btn-primary btn-large"
+							onClick={() => document.getElementById('e-bike-picnics')?.scrollIntoView({ behavior: 'smooth' })}
+						>
+							E-bike Picnics
+						</button>
+					</div>
 				</div>
 			</div>
 		
@@ -165,7 +199,7 @@ setLoading(false);
 
 			{/* E-bike ytour Section new */}
 
-			<section className="section">
+			<section id="short-escapes" className="section">
 				<div className="container">
 					<div className="section-title">
 						<h2 className="fade-in">Short Escapes</h2>
@@ -209,7 +243,7 @@ setLoading(false);
 			</section>
 
 			{/* E-bike Picnics Section */}
-			<section className="section">
+			<section id="e-bike-picnics" className="section">
 				<div className="container">
 					<div className="section-title">
 						<h2 className="fade-in">All Inclusive E-bike Picnics</h2>

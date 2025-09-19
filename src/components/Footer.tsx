@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
 					<div className="footer-section">
 						<div className="footer-logo">
 							<Mountain className="logo-icon" />
-							<h3>Peak Pedals</h3>
+							<h3>Peak Pedals Escapes</h3>
 						</div>
 						<p>
 							Experience the breathtaking beauty of Sri Lanka's hill country through our
@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
 				</div>
 
 				<div className="footer-bottom">
-					<p>&copy; 2024 Peak Pedals. All rights reserved. | Explore Sri Lanka's Hill Country Responsibly</p>
+					<p>&copy; 2024 Peak Pedals Escapes. All rights reserved. | Explore Sri Lanka's Hill Country Responsibly</p>
 				</div>
 			</div>
 		</footer>

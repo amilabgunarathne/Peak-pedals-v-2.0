@@ -78,15 +78,31 @@ const About: React.FC = () => {
 	];
 
 	return (
-		<div style={{ paddingTop: '80px' }}>
-			{/* Hero Section */}
-			<section className="hero" style={{ height: '60vh' }}>
-				<div className="hero-content">
-					<h1 className="fade-in">About Hill Country E-Bikes</h1>
-					<p className="fade-in">
-						Passionate about sharing the beauty of Sri Lanka's hill country through
-						sustainable and authentic e-bike adventures
-					</p>
+		<div>
+			{/* Hero Section with Cover Image */}
+			<section className="hero" style={{
+				height: '100vh',
+				backgroundImage: `url('/assets/images/cover_images/aboutus.jpeg')`,
+				backgroundPosition: 'center',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+				position: 'relative',
+				display: 'flex',
+				alignItems: 'flex-end',
+				justifyContent: 'center',
+				paddingBottom: '200px'
+			}}>
+				<div style={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					background: 'rgba(0, 0, 0, 0.15)'
+				}}></div>
+				<div className="hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+					<h1 className="carousel-main-heading fade-in">ABOUT HILL COUNTRY E-BIKES</h1>
+					<h2 className="carousel-sub-heading fade-in">Passionate About Sharing Sri Lanka's Hill Country Beauty</h2>
 				</div>
 			</section>
 
@@ -114,7 +130,7 @@ const About: React.FC = () => {
 								Hill Country E-Bikes was born from a deep love for Sri Lanka's breathtaking
 								hill country and a desire to share its beauty with the world. Founded in 2019
 								by local guide Kasun Perera, our company started with a simple vision: to offer
-								sustainable, authentic, and unforgettable adventures through the misty mountains
+								sustainable, authentic, and unforgettable escapes through the misty mountains
 								and tea plantations around Haputale.
 							</p>
 							<p>

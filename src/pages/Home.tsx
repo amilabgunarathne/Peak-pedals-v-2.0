@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Users, Star, Leaf, Camera, Mountain, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTours } from '../context/TourContext';
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { popularTours, loading, error } = useTours();
+
 
   useEffect(() => {
     // Animation on scroll
@@ -26,6 +29,8 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Data fetching is now handled by TourContext
+
   // Auto-scroll carousel
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,10 +44,10 @@ const Home: React.FC = () => {
     {
       id: 1,
       image: "/assets/images/cover_images/home1.JPG",
-      mainHeading: "UNFORGETTABLE E-BIKE ADVENTURES",
+      mainHeading: "UNFORGETTABLE E-BIKE ESCAPES",
       subHeading: "in Sri Lanka's Highlands",
-      subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
-      buttonText: "Book a Picnic",
+      // subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
+      buttonText: "Book a Escape",
       buttonLink: "/tours"
     },
     {
@@ -50,7 +55,7 @@ const Home: React.FC = () => {
       image: "/assets/images/cover_images/home2.jpg",
       mainHeading: "DISCOVER FANTASTIC PLACES",
       subHeading: "Experience the Best of Hill Country",
-      subtitle: "We offer a variety of services and options",
+      // subtitle: "We offer a variety of services and options",
       buttonText: "Read More",
       buttonLink: "/about"
     },
@@ -59,7 +64,7 @@ const Home: React.FC = () => {
       image: "/assets/images/cover_images/home3.jpg",
       mainHeading: "ENJOY A LOVELY TOUR",
       subHeading: "Through Breathtaking Landscapes",
-      subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
+      // subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
       buttonText: "Explore",
       buttonLink: "/tours"
     }
@@ -230,7 +235,7 @@ const Home: React.FC = () => {
       <section className="section features">
         <div className="container">
           <div className="section-title">
-            <h2 className="fade-in">Why Choose Peak Pedals?</h2>
+            <h2 className="fade-in">Why Choose Peak Pedals Escapes?</h2>
             <p className="fade-in">
               A mindful way to explore nature, heritage, and the heart of the hills.
             </p>
@@ -254,70 +259,132 @@ const Home: React.FC = () => {
       <section className="section">
         <div className="container">
           <div className="section-title">
-            <h2 className="fade-in">Our All Inclusive E Bike Picnics</h2>
+            <h2 className="fade-in">Our Signature Peak Pedals Escapes</h2>
             <p className="fade-in">
-              From misty mountains to lush tea estates, explore the highlands like never before on our guided picnics.
+            The rides our guests can’t stop talking about — scenic, guided, and unforgettable.
             </p>
           </div>
           
           <div className="tours-grid">
-            {picnics.map((picnic, index) => (
-              <div key={picnic.id} className="tour-card fade-in">
-                <div className="tour-image">
-                  <img src={picnic.image} alt={picnic.name} />
-                  <div className="tour-badge">{picnic.difficulty}</div>
-                </div>
-                
-                <div className="tour-info">
-                  <h3>{picnic.name}</h3>
-                  <p className="tour-description">{picnic.description}</p>
+            {loading ? (
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+                <p>Loading popular tours...</p>
+              </div>
+            ) : error ? (
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+                <p>Error: {error}</p>
+                <button 
+                  onClick={() => window.location.reload()}
+                  style={{ marginLeft: '10px', padding: '5px 10px' }}
+                >
+                  Retry
+                </button>
+              </div>
+            ) : popularTours.length === 0 ? (
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+                <p>No popular tours available at the moment.</p>
+              </div>
+            ) : (
+              popularTours.map((tour, index) => (
+                <div key={tour.id || index} className="tour-card fade-in" style={{ position: 'relative' }}>
+                  {/* Most Popular Icon - Compact Design */}
+                  {tour.most_popular === 'Yes' && (
+                    <div className="popular-icon" style={{ 
+                      position: 'absolute', 
+                      top: '8px', 
+                      left: '8px', 
+                      zIndex: 3,
+                      width: '32px',
+                      height: '32px',
+                      background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 8px rgba(255, 107, 53, 0.4)',
+                      border: '2px solid rgba(255, 255, 255, 0.3)',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      animation: 'pulse 2s infinite'
+                    }}
+                    title="Most Popular Tour"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(255, 107, 53, 0.6)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 107, 53, 0.4)';
+                    }}>
+                      <span style={{ 
+                        fontSize: '16px', 
+                        color: 'white',
+                        fontWeight: 'bold',
+                        textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                      }}>
+                        ⭐
+                      </span>
+                    </div>
+                  )}
                   
-                  <div className="tour-meta">
-                    <div className="tour-rating">
-                      <div className="stars">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            size={16}
-                            className={`star ${i < picnic.rating ? 'filled' : ''}`}
-                          />
-                        ))}
+                  <div className="tour-image">
+                    <img src={tour.image || "https://via.placeholder.com/300"} alt={tour.name} />
+                    <div className="tour-badge">{tour.difficulty}</div>
+                  </div>
+                  
+                  <div className="tour-info">
+                    <h3>{tour.name}</h3>
+                    <p className="tour-description">{tour.description}</p>
+                    
+                    <div className="tour-meta">
+                      <div className="tour-rating">
+                        <div className="stars">
+                          {[...Array(5)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              size={16}
+                              className={`star ${i < (tour.rating || 5) ? 'filled' : ''}`}
+                            />
+                          ))}
+                        </div>
+                        <span className="rating-text">({tour.reviews || 0} reviews)</span>
                       </div>
-                      <span className="rating-text">({picnic.reviews} reviews)</span>
+                      
+                      <div className="tour-details">
+                        <div className="detail">
+                          <Clock size={16} />
+                          <span>{tour.duration}</span>
+                        </div>
+                        <div className="detail">
+                          <Users size={16} />
+                          <span>Max {tour.maxPeople || 8} people</span>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="tour-details">
-                      <div className="detail">
-                        <Clock size={16} />
-                        <span>{picnic.duration}</span>
-                      </div>
-                      <div className="detail">
-                        <Users size={16} />
-                        <span>Max 8 people</span>
-                      </div>
+                    <div className="tour-highlights">
+                      {tour.highlights ? (
+                        <span className="highlight-tag">
+                          {tour.highlights}
+                        </span>
+                      ) : (
+                        <span className="highlight-tag">Scenic Views</span>
+                      )}
                     </div>
-                  </div>
-                  
-                  <div className="tour-highlights">
-                    {picnic.highlights.map((highlight, i) => (
-                      <span key={i} className="highlight-tag">
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="tour-footer">
-                    <div className="tour-price">
-                      <span className="price">{picnic.price}</span>
-                      <span className="price-label">per person</span>
+                    
+                    <div className="tour-footer">
+                      <div className="tour-price">
+                        <span className="price">{tour.price}</span>
+                        <span className="price-label">per person</span>
+                      </div>
+                      <Link to={`/tour/${tour.id}`} className="btn btn-primary">
+                        Book Now
+                      </Link>
                     </div>
-                    <Link to={`/tour/${picnic.id}`} className="btn btn-primary">
-                      Book Now
-                    </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           
           <div className="section-cta">

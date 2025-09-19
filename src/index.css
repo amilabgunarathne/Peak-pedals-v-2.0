@@ -1,9 +1,9 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -170,12 +170,13 @@ html {
   background-position: center;
   background-attachment: fixed;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   text-align: center;
   color: var(--white);
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  padding-bottom: 120px;
 }
 
 .carousel-slide.active {
@@ -193,24 +194,21 @@ html {
 }
 
 .carousel-main-heading {
-  font-size: 2.8rem;
+  font-size: 1.8rem;
   font-weight: 900;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   font-family: 'Playfair Display', serif;
   line-height: 1.1;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  background: linear-gradient(135deg, #ffffff, #f0f0f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
 }
 
 .carousel-sub-heading {
-  font-size: 2.8rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   font-family: 'Playfair Display', serif;
   line-height: 1.2;
@@ -219,10 +217,10 @@ html {
 }
 
 .carousel-subtitle {
-  font-size: 1.4rem;
-  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
   opacity: 0.9;
-  max-width: 700px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -316,17 +314,25 @@ html {
 }
 
 .hero h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   font-family: 'Playfair Display', serif;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .hero p {
-  font-size: 1.4rem;
-  margin-bottom: 2.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+  color: var(--white);
   opacity: 0.95;
   max-width: 700px;
   margin-left: auto;
@@ -335,20 +341,20 @@ html {
 
 .cta-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-stats {
   position: absolute;
-  bottom: 50px;
+  bottom: 20px;
   left: 0;
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 3rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -372,7 +378,7 @@ html {
 
 .stat-number {
   display: block;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--white);
   margin-bottom: 0.5rem;
@@ -386,7 +392,7 @@ html {
 
 /* Button Styles */
 .btn {
-  padding: 14px 32px;
+  padding: 10px 24px;
   border: none;
   border-radius: 50px;
   font-weight: 600;
@@ -396,7 +402,7 @@ html {
   gap: 0.5rem;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: center;
   justify-content: center;
 }
@@ -425,8 +431,8 @@ html {
 }
 
 .btn-large {
-  padding: 16px 40px;
-  font-size: 1.1rem;
+  padding: 12px 28px;
+  font-size: 1rem;
 }
 
 /* Section Styles */
@@ -446,15 +452,15 @@ html {
 }
 
 .section-title h2 {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--dark-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   font-family: 'Playfair Display', serif;
 }
 
 .section-title p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--gray);
   max-width: 700px;
   margin: 0 auto;
@@ -510,9 +516,9 @@ html {
 }
 
 .feature-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   color: var(--dark-color);
 }
 
@@ -577,9 +583,9 @@ html {
 }
 
 .tour-info h3 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   color: var(--dark-color);
 }
 
@@ -847,9 +853,9 @@ html {
 }
 
 .cta-content h2 {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   font-family: 'Playfair Display', serif;
 }
 
@@ -939,7 +945,7 @@ html {
 }
 
 .category-header h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--dark-color);
   font-family: 'Playfair Display', serif;
@@ -1037,10 +1043,10 @@ html {
 }
 
 .about-text h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--dark-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   font-family: 'Playfair Display', serif;
 }
 
@@ -1095,6 +1101,13 @@ html {
   height: 32px;
 }
 
+.value-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--dark-color);
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1144,7 +1157,7 @@ html {
 }
 
 .team-info h3 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--dark-color);
@@ -1271,7 +1284,7 @@ html {
 }
 
 .contact-form-section h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--dark-color);
   margin-bottom: 1rem;
@@ -1417,7 +1430,7 @@ html {
 }
 
 .location-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--dark-color);
@@ -1739,6 +1752,165 @@ html {
 
   .carousel-next {
     right: 15px;
+  }
+}
+
+/* Loading and Popular Badge Styles */
+.loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.no-tours-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+  z-index: 2;
+}
+
+.tour-image {
+  position: relative;
+}
+
+/* Skeleton Loading Styles */
+.tour-card-skeleton {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-content {
+  padding: 1.5rem;
+}
+
+.skeleton-title {
+  height: 24px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  width: 60%;
+}
+
+.skeleton-description {
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.skeleton-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.skeleton-rating {
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  width: 120px;
+}
+
+.skeleton-details {
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  width: 100px;
+}
+
+.skeleton-highlights {
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skeleton-footer::before {
+  content: '';
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  width: 80px;
+}
+
+.skeleton-footer::after {
+  content: '';
+  height: 40px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 6px;
+  width: 100px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Popular Badge Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
   }
 }
 

@@ -18,6 +18,7 @@ const TourDetails: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
 
   // Country data with phone codes
   const countries = [
@@ -67,12 +68,117 @@ const TourDetails: React.FC = () => {
     return () => observer.disconnect();
   }, [id]); // Add id as dependency to scroll to top when tour changes
 
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: {[key: string]: string} = {};
+
+    // Required field validations
+    if (!formData.name.trim()) {
+      newErrors.name = 'This field is required';
+    }
+
+    // Enhanced email validation with clearer messages
+    if (!formData.email.trim()) {
+      newErrors.email = 'This field is required';
+    } else if (formData.email.trim().length < 5) {
+      newErrors.email = 'Email address is too short';
+    } else if (!formData.email.includes('@')) {
+      newErrors.email = 'Email must contain @ symbol';
+    } else if (!formData.email.includes('.')) {
+      newErrors.email = 'Email must contain a domain';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'This field is required';
+    }
+
+    if (!formData.country) {
+      newErrors.country = 'This field is required';
+    }
+
+    if (!formData.groupSize) {
+      newErrors.groupSize = 'This field is required';
+    }
+
+    if (!formData.preferredDate) {
+      newErrors.preferredDate = 'This field is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+
+    // Real-time validation for required fields
+    if (name === 'name') {
+      if (!value.trim()) {
+        setErrors(prev => ({ ...prev, name: 'This field is required' }));
+      } else {
+        setErrors(prev => ({ ...prev, name: '' }));
+      }
+    }
+
+    if (name === 'phone') {
+      if (!value.trim()) {
+        setErrors(prev => ({ ...prev, phone: 'This field is required' }));
+      } else {
+        setErrors(prev => ({ ...prev, phone: '' }));
+      }
+    }
+
+    if (name === 'country') {
+      if (!value) {
+        setErrors(prev => ({ ...prev, country: 'This field is required' }));
+      } else {
+        setErrors(prev => ({ ...prev, country: '' }));
+      }
+    }
+
+    if (name === 'groupSize') {
+      if (!value) {
+        setErrors(prev => ({ ...prev, groupSize: 'This field is required' }));
+      } else {
+        setErrors(prev => ({ ...prev, groupSize: '' }));
+      }
+    }
+
+    if (name === 'preferredDate') {
+      if (!value) {
+        setErrors(prev => ({ ...prev, preferredDate: 'This field is required' }));
+      } else {
+        setErrors(prev => ({ ...prev, preferredDate: '' }));
+      }
+    }
+
+    // Real-time email validation
+    if (name === 'email') {
+      if (!value.trim()) {
+        setErrors(prev => ({ ...prev, email: 'This field is required' }));
+      } else if (value.trim().length < 5) {
+        setErrors(prev => ({ ...prev, email: 'Email address is too short' }));
+      } else if (!value.includes('@')) {
+        setErrors(prev => ({ ...prev, email: 'Email must contain @ symbol' }));
+      } else if (!value.includes('.')) {
+        setErrors(prev => ({ ...prev, email: 'Email must contain a domain' }));
+      } else if (!validateEmail(value)) {
+        setErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }));
+      } else {
+        setErrors(prev => ({ ...prev, email: '' }));
+      }
+    }
 
     // Auto-populate phone code when country changes
     if (name === 'country') {
@@ -88,6 +194,12 @@ const TourDetails: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -236,7 +348,7 @@ const TourDetails: React.FC = () => {
       itinerary: [
         {
           time: "7:00 AM",
-          activity: "Meet at Peak Pedals base",
+          activity: "Meet at Peak Pedals Escapes base",
           description: "Safety briefing and bike fitting"
         },
         {
@@ -322,7 +434,7 @@ const TourDetails: React.FC = () => {
       itinerary: [
         {
           time: "7:00 AM",
-          activity: "Meet at Peak Pedals base",
+          activity: "Meet at Peak Pedals Escapes base",
           description: "Safety briefing and bike fitting"
         },
         {
@@ -1008,7 +1120,7 @@ const TourDetails: React.FC = () => {
                 <form onSubmit={handleSubmit} className="contact-form">
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Full Name *</label>
+                      <label>Full Name <span style={{color: 'black'}}>*</span></label>
                       <input
                         type="text"
                         name="name"
@@ -1017,10 +1129,12 @@ const TourDetails: React.FC = () => {
                         required
                         placeholder="Your full name"
                         disabled={isSubmitting}
+                        style={{borderColor: errors.name ? 'red' : ''}}
                       />
+                      {errors.name && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.name}</span>}
                     </div>
                     <div className="form-group">
-                      <label>Email Address *</label>
+                      <label>Email Address <span style={{color: 'black'}}>*</span></label>
                       <input
                         type="email"
                         name="email"
@@ -1029,18 +1143,21 @@ const TourDetails: React.FC = () => {
                         required
                         placeholder="your.email@example.com"
                         disabled={isSubmitting}
+                        style={{borderColor: errors.email ? 'red' : ''}}
                       />
+                      {errors.email && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.email}</span>}
                     </div>
                   </div>
                   
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Country</label>
+                      <label>Country <span style={{color: 'black'}}>*</span></label>
                       <select
                         name="country"
                         value={formData.country}
                         onChange={handleInputChange}
                         disabled={isSubmitting}
+                        style={{borderColor: errors.country ? 'red' : ''}}
                       >
                         <option value="">Select your country</option>
                         {countries.map(country => (
@@ -1049,9 +1166,10 @@ const TourDetails: React.FC = () => {
                           </option>
                         ))}
                       </select>
+                      {errors.country && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.country}</span>}
                     </div>
                     <div className="form-group">
-                      <label>Phone Number</label>
+                      <label>Phone Number <span style={{color: 'black'}}>*</span></label>
                       <input
                         type="tel"
                         name="phone"
@@ -1059,18 +1177,21 @@ const TourDetails: React.FC = () => {
                         onChange={handleInputChange}
                         placeholder="+94 77 123 4567"
                         disabled={isSubmitting}
+                        style={{borderColor: errors.phone ? 'red' : ''}}
                       />
+                      {errors.phone && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.phone}</span>}
                     </div>
                   </div>
                   
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Group Size</label>
+                      <label>Group Size <span style={{color: 'black'}}>*</span></label>
                       <select
                         name="groupSize"
                         value={formData.groupSize}
                         onChange={handleInputChange}
                         disabled={isSubmitting}
+                        style={{borderColor: errors.groupSize ? 'red' : ''}}
                       >
                         <option value="">Select group size</option>
                         <option value="1">1 person</option>
@@ -1078,9 +1199,10 @@ const TourDetails: React.FC = () => {
                         <option value="3">3 people (10% discount)</option>
                         <option value="4">4 people (15% discount)</option>
                       </select>
+                      {errors.groupSize && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.groupSize}</span>}
                     </div>
                     <div className="form-group">
-                      <label>Preferred Date</label>
+                      <label>Preferred Date <span style={{color: 'black'}}>*</span></label>
                       <input
                         type="date"
                         name="preferredDate"
@@ -1088,7 +1210,9 @@ const TourDetails: React.FC = () => {
                         onChange={handleInputChange}
                         min={new Date().toISOString().split('T')[0]}
                         disabled={isSubmitting}
+                        style={{borderColor: errors.preferredDate ? 'red' : ''}}
                       />
+                      {errors.preferredDate && <span style={{color: 'red', fontSize: '0.8rem'}}>{errors.preferredDate}</span>}
                     </div>
                   </div>
                   

@@ -8,6 +8,7 @@ import About from './pages/About';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
+import { TourProvider } from './context/TourContext';
 
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -22,21 +23,23 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tours" element={<Tours />} />
-          <Route path="/tour/:id" element={<TourDetails />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <TourProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tours" element={<Tours />} />
+            <Route path="/tour/:id" element={<TourDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </TourProvider>
   );
 }
 

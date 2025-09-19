@@ -166,15 +166,30 @@ const FAQ: React.FC = () => {
 
   return (
     <div>
-      <div className="cover-image" style={{ width: '100%', height: '250px', background: `url('/assets/images/faq-cover.jpg') center/cover no-repeat` }} />
-      {/* Hero Section */}
-      <section className="hero" style={{ height: '50vh' }}>
-        <div className="hero-content">
-          <h1 className="fade-in">Frequently Asked Questions</h1>
-          <p className="fade-in">
-            Everything you need to know about our e-bike tours and picnic adventures 
-            in Sri Lanka's beautiful hill country
-          </p>
+      {/* Hero Section with Cover Image */}
+      <section className="hero" style={{
+        height: '100vh',
+        backgroundImage: `url('/assets/images/cover_images/faq.jpg')`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingBottom: '200px'
+      }}>
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.15)'
+        }}></div>
+        <div className="hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          <h1 className="carousel-main-heading fade-in">FREQUENTLY ASKED QUESTIONS</h1>
+          <h2 className="carousel-sub-heading fade-in">Everything You Need to Know About Our E-Bike Escapes?</h2>
         </div>
       </section>
 

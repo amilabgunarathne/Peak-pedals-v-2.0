@@ -64,15 +64,30 @@ const Contact: React.FC = () => {
 
   return (
     <div>
-      <div className="cover-image" style={{ width: '100%', height: '250px', background: `url('/assets/images/cover_images/contact.jpg') center/cover no-repeat` }} />
       {/* Hero Section */}
-      <section className="hero" style={{ height: '50vh' }}>
-        <div className="hero-content">
-          <h1 className="fade-in">Contact Us</h1>
-          <p className="fade-in">
-            Ready for your hill country adventure? Get in touch and let's plan 
-            your perfect e-bike tour experience
-          </p>
+      <section className="hero" style={{
+        height: '100vh',
+        backgroundImage: `url('/assets/images/cover_images/contact.jpg')`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingBottom: '200px'
+      }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(0, 0, 0, 0.15)'
+                }}></div>
+        <div className="hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          <h1 className="carousel-main-heading fade-in">CONTACT US</h1>
+          <h2 className="carousel-sub-heading fade-in">Ready for Your Hill Country Escape?</h2>
         </div>
       </section>
 

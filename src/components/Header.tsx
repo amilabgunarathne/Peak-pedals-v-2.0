@@ -32,8 +32,8 @@ const Header: React.FC = () => {
 		<header className={`header ${isScrolled ? 'scrolled' : ''}`}>
 			<nav className="navbar">
 				<Link to="/" className="logo" onClick={closeMenu}>
-					<img src="/assets/images/peak pedals logo.jpg" alt="Peak Pedals logo" className="logo-icon" style={{ height: '40px', width: 'auto' }} />
-					<span>Peak Pedals</span>
+					<img src="/assets/images/peak pedals logo.jpg" alt="Peak Pedals Escapes logo" className="logo-icon" style={{ height: '40px', width: 'auto' }} />
+					<span>Peak Pedals Escapes</span>
 				</Link>
 
 				<ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
