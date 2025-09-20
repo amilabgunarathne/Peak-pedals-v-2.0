@@ -56,7 +56,7 @@ const Home: React.FC = () => {
       id: 1,
       image: "/assets/images/cover_images/home1.JPG",
       mainHeading: "UNFORGETTABLE E-BIKE ESCAPES",
-      subHeading: "in Sri Lanka's Highlands",
+      subHeading: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
       // subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
       buttonText: "Book a Escape",
       buttonLink: "/tours"
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
       id: 3,
       image: "/assets/images/cover_images/home3.jpg",
       mainHeading: "ENJOY A LOVELY TOUR",
-      subHeading: "Through Breathtaking Landscapes",
+      subHeading: "Unwind on two wheels",
       // subtitle: "Scenic Trails - Hidden Gems - Picnic-Style Experiences",
       buttonText: "Explore",
       buttonLink: "/tours"
@@ -183,7 +183,7 @@ const Home: React.FC = () => {
               }}
             >
               <div className="hero-content">
-                <h1 className="carousel-main-heading fade-in">{slide.mainHeading}</h1>
+                <h1 className="carousel-main-heading fade-in ">{slide.mainHeading}</h1>
                 <h2 className="carousel-sub-heading fade-in">{slide.subHeading}</h2>
                 {/* <p className="carousel-subtitle fade-in">{slide.subtitle}</p> */}
                 <div className="cta-buttons fade-in">

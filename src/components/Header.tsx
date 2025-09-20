@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 			<nav className="navbar">
 				<Link to="/" className="logo" onClick={closeMenu}>
 					<img src="/assets/images/peak pedals logo.jpg" alt="Peak Pedals Escapes logo" className="logo-icon" style={{ height: '40px', width: 'auto' }} />
-					<span>Peak Pedals Escapes</span>
+					<span className="hangyaboly-text" >Peak Pedals Escapes</span>
 				</Link>
 
 				<ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>

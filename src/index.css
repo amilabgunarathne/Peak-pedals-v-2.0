@@ -10,6 +10,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+@font-face {
+  font-family: 'Hangyaboly';
+  src: url('./assets/fonts/hangyaboly.regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SpecialElite';
+  src: url('./assets/fonts/SpecialElite.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.hangyaboly-text {
+  font-family: 'Hangyaboly', sans-serif;
+}
+.SpecialElite-text {
+  font-family: 'SpecialElite', sans-serif;
+}
 .spinner {
   margin: 20px auto;
   border: 4px solid #f3f3f3;
@@ -68,11 +86,12 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
   backdrop-filter: blur(15px);
   z-index: 1000;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+  opacity: .8;
 }
 
 .header.scrolled {
@@ -84,9 +103,10 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0.3rem 3%;
   max-width: 1400px;
   margin: 0 auto;
+
 }
 
 .logo {
@@ -94,7 +114,7 @@ html {
   align-items: center;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 550;
   color: var(--primary-color);
   text-decoration: none;
   font-family: 'Playfair Display', serif;
@@ -102,6 +122,8 @@ html {
 
 .logo-icon {
   color: var(--primary-color);
+  height: 50px !important;
+  width:95px !important;
 }
 
 .nav-links {
@@ -176,7 +198,7 @@ html {
   color: var(--white);
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  padding-bottom: 120px;
+  padding-bottom: 170px;
 }
 
 .carousel-slide.active {
@@ -195,10 +217,11 @@ html {
 
 .carousel-main-heading {
   font-size: 1.8rem;
-  font-weight: 900;
+  font-weight: 500;
   margin-bottom: 0.3rem;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-  font-family: 'Playfair Display', serif;
+  font-family: 'SpecialElite', sans-serif;
+ 
   line-height: 1.1;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -206,7 +229,7 @@ html {
 }
 
 .carousel-sub-heading {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
@@ -617,6 +640,7 @@ html {
 
 .star.filled {
   color: #ffc107;
+  display: inline;
 }
 
 .rating-text {
