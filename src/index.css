@@ -12,13 +12,13 @@
 }
 @font-face {
   font-family: 'Hangyaboly';
-  src: url('./assets/fonts/hangyaboly.regular.ttf') format('truetype');
+  src: url('/assets/fonts/hangyaboly.regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'SpecialElite';
-  src: url('./assets/fonts/SpecialElite.ttf') format('truetype');
+  src: url('/assets/fonts/SpecialElite.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
