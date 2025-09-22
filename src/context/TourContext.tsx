@@ -46,7 +46,10 @@ interface TourProviderProps {
 }
 
 export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
-  const [tours, setTours] = useState<Tour[]>([]);
+  const [tours, setTours] = useState<Tour[]>(
+    
+    
+    []);
   const [popularTours, setPopularTours] = useState<Tour[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

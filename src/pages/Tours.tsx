@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Leaf, Camera, Mountain } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonBiking } from '@fortawesome/free-solid-svg-icons';
+import { MapPin, Clock, Users, Star, Leaf, Camera, Mountain, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Tour {
 	id: string;
@@ -164,7 +164,7 @@ setLoading(false);
 					display: 'flex',
 					alignItems: 'flex-end',
 					justifyContent: 'center',
-					paddingBottom: '100px'
+					paddingBottom: '150px'
 				}}
 			>
 				<div style={{
@@ -230,6 +230,40 @@ setLoading(false);
 										<div className="tour-info">
 											<h3>{tour.name}</h3>
 											<p className="tour-description">{tour.description}</p>
+											  <div className="tour-meta">
+																
+																  
+																  <div className="tour-details">
+																	<div className="detail">
+																	  <Clock size={16} />
+																	  <span>{tour.duration}</span>
+																	</div>
+																	<div className="detail">
+																	  <Users size={16} />
+																	  <span>Max {tour.maxPeople || 8} people</span>
+																	</div>
+																  </div>
+																</div>
+																
+																<div className="tour-highlights">
+																  {tour.highlights ? (
+																	<span className="highlight-tag">
+																	  {tour.highlights}
+																	</span>
+																  ) : (
+																	<span className="highlight-tag">Scenic Views</span>
+																  )}
+																</div>
+																
+																<div className="tour-footer">
+																  <div className="tour-price">
+																	<span className="price">${tour.price}</span>
+																	<span className="price-label">per person</span>
+																  </div>
+																  <Link to={`/tour/${tour.id}`} className="btn btn-primary">
+																	Book Now
+																  </Link>
+																</div>
 										</div>
 									</div>
 								</Link>

@@ -290,24 +290,32 @@ const Home: React.FC = () => {
                 <div key={tour.id || index} className="tour-card fade-in" style={{ position: 'relative' }}>
                   {/* Most Popular Icon - Compact Design */}
                   {tour.most_popular === 'Yes' && (
-                    <div className="popular-icon" style={{ 
-                      position: 'absolute', 
-                      top: '8px', 
-                      left: '8px', 
-                      zIndex: 3,
-                      width: '32px',
-                      height: '32px',
-                      background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 2px 8px rgba(255, 107, 53, 0.4)',
-                      border: '2px solid rgba(255, 255, 255, 0.3)',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      animation: 'pulse 2s infinite'
-                    }}
+                      <div
+    style={{
+      position: 'absolute',
+      top: '8px',
+      left: '8px',
+      zIndex: 3,
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px'
+    }}
+  >
+                 
+                     <div
+      style={{
+        width: '26px',
+        height: '26px',
+        background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxShadow: '0 2px 8px rgba(255, 107, 53, 0.4)',
+        border: '2px solid rgba(255,255,255,0.3)',
+        cursor: 'pointer',
+        transition: 'transform 0.2s, box-shadow 0.2s'
+      }}
                     title="Most Popular Tour"
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'scale(1.1)';
@@ -325,8 +333,23 @@ const Home: React.FC = () => {
                       }}>
                         ⭐
                       </span>
+     
                     </div>
-                  )}
+                      <span
+      style={{
+        fontSize: '10px',
+        fontWeight: 'bold',
+        color: '#fff',
+        textShadow: '0 1px 2px rgba(0,0,0,0.15)'
+      }}
+    >
+      Most Popular
+    </span>
+     </div>
+                  )
+
+                  
+                  }
                   
                   <div className="tour-image">
                     <img src={tour.image || "https://via.placeholder.com/300"} alt={tour.name} />
@@ -375,7 +398,7 @@ const Home: React.FC = () => {
                     
                     <div className="tour-footer">
                       <div className="tour-price">
-                        <span className="price">{tour.price}</span>
+                        <span className="price">${tour.price}</span>
                         <span className="price-label">per person</span>
                       </div>
                       <Link to={`/tour/${tour.id}`} className="btn btn-primary">
