@@ -1,35 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo  } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonBiking } from '@fortawesome/free-solid-svg-icons';
 import { MapPin, Clock, Users, Star, Leaf, Camera, Mountain, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTours } from '../context/TourContext';
 
-interface Tour {
-	id: string;
-	name: string;
-	category: string;
-	duration: string;
-	difficulty: string;
-	price: string;
-	originalPrice?: string;
-	image: string;
-	gallery?: string;
-	rating?: number;
-	reviews?: number;
-	maxPeople?: number;
-	location: string;
-	description: string;
-	highlights?: string;
-	includes?: string;
-	itinerary?: string;
-	whatToBring?: string;
-	difficulty_details?: string;
-}
+// interface Tour {
+// 	id: string;
+// 	name: string;
+// 	category: string;
+// 	duration: string;
+// 	difficulty: string;
+// 	price: string;
+// 	originalPrice?: string;
+// 	image: string;
+// 	gallery?: string;
+// 	rating?: number;
+// 	reviews?: number;
+// 	maxPeople?: number;
+// 	location: string;
+// 	description: string;
+// 	highlights?: string;
+// 	includes?: string;
+// 	itinerary?: string;
+// 	whatToBring?: string;
+// 	difficulty_details?: string;
+// }
 const Tours: React.FC = () => {
-	const [shortTours, setShortTours] = useState<Tour[]>([]);
-	const [picnicTours, setPicnicTours] = useState<Tour[]>([]);
-	const [loading, setLoading] = useState(true);
+	// const [shortTours, setShortTours] = useState<Tour[]>([]);
+	// const [picnicTours, setPicnicTours] = useState<Tour[]>([]);
+	// const [loading, setLoading] = useState(true);
 
+
+	const { tours, loading, error } = useTours();
+  const shortTours = useMemo(
+    () => tours.filter((tour) => tour.category?.toLowerCase() === "short"),
+    [tours]
+  );
+
+  const picnicTours = useMemo(
+    () =>
+      tours.filter(
+        (tour) =>
+          tour.category?.toLowerCase() === "picnic" ||
+          tour.category?.toLowerCase() === "picnics"
+      ),
+    [tours]
+  );
+	
 	useEffect(() => {
 		// Animation on scroll
 		const observerOptions = {
@@ -49,7 +67,7 @@ const Tours: React.FC = () => {
 		animatedElements.forEach(el => observer.observe(el));
 
 		return () => observer.disconnect();
-	}, []);
+	}, [shortTours.length, picnicTours.length]);
 
 	useEffect(() => {
 		// Animation on scroll
@@ -58,39 +76,39 @@ const Tours: React.FC = () => {
 			rootMargin: '0px 0px -50px 0px'
 		};
 
-		fetch('https://script.google.com/macros/s/AKfycbw6k_STSNcKQSsNFEe38OjV_rI72PfTs6cECGbdNwV1sXCDTJJqZ31dxi3x5xtkxe4T/exec')
-			.then(res => res.json())
-			.then(data => {
-				console.log("Tours:", data);
+// 		fetch('https://script.google.com/macros/s/AKfycbw6k_STSNcKQSsNFEe38OjV_rI72PfTs6cECGbdNwV1sXCDTJJqZ31dxi3x5xtkxe4T/exec')
+// 			.then(res => res.json())
+// 			.then(data => {
+// 				console.log("Tours:", data);
 
-				data.forEach((tour: any, i: number) => {
-					console.log(`Tour ${i}:`, {
-						id: tour.id,
-						name: tour.name,
-						category: tour.category
-					});
-				});
-				const short = data.filter((tour: any) => tour.category === "short");
-				const picnic = data.filter((tour: any) => tour.category === "picnic" || tour.category === "picnics");
+// 				data.forEach((tour: any, i: number) => {
+// 					console.log(`Tour ${i}:`, {
+// 						id: tour.id,
+// 						name: tour.name,
+// 						category: tour.category
+// 					});
+// 				});
+// 				const short = data.filter((tour: any) => tour.category === "short");
+// 				const picnic = data.filter((tour: any) => tour.category === "picnic" || tour.category === "picnics");
 
 
-				console.log("Short tours (filtered):", short);
-				console.log("Picnic tours (filtered):", picnic);
+// 				console.log("Short tours (filtered):", short);
+// 				console.log("Picnic tours (filtered):", picnic);
 
-				setShortTours(short);
-				  setPicnicTours(picnic);
-				 setLoading(false);
+// 				setShortTours(short);
+// 				  setPicnicTours(picnic);
+// 				 setLoading(false);
    
-			})
-			.catch(err => {
-				console.error(err);
-setLoading(false);
+// 			})
+// 			.catch(err => {
+// 				console.error(err);
+// setLoading(false);
 
 
-			}
+// 			}
 		
 		
-		);
+// 		);
 			
 	}, []);
 
@@ -111,19 +129,19 @@ setLoading(false);
 
 		const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
 		animatedElements.forEach(el => observer.observe(el));
-	}, [shortTours.length, picnicTours.length]);
+	}, []);
 
 
-	const TourList: React.FC<{ tours: Tour[] }> = ({ tours }) => (
-		<div>
-			{tours.map((tour) => (
-				<div key={tour.id}>
-					<h3>{tour.name}</h3>
-					<p>{tour.description}</p>
-				</div>
-			))}
-		</div>
-	);
+	// const TourList: React.FC<{ tours: Tour[] }> = ({ tours }) => (
+	// 	<div>
+	// 		{tours.map((tour) => (
+	// 			<div key={tour.id}>
+	// 				<h3>{tour.name}</h3>
+	// 				<p>{tour.description}</p>
+	// 			</div>
+	// 		))}
+	// 	</div>
+	// );
 	return (
   <>
     {loading ? (
