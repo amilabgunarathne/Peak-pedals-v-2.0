@@ -47,10 +47,14 @@ interface TourProviderProps {
 
 export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
   const [tours, setTours] = useState<Tour[]>(
-    
-    
-    []);
-  const [popularTours, setPopularTours] = useState<Tour[]>([]);
+   () => {
+    const cached = sessionStorage.getItem("tours");
+    return cached ? JSON.parse(cached) : [];
+  });
+  const [popularTours, setPopularTours] = useState<Tour[]>(() => {
+    const cached = sessionStorage.getItem("popularTours");
+    return cached ? JSON.parse(cached) : [];
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -77,10 +81,11 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
       }
 
       setTours(data);
-      
+      sessionStorage.setItem("tours", JSON.stringify(data));
       // Filter popular tours
       const popular = data.filter((tour: any) => tour && tour.most_popular === 'Yes');
       setPopularTours(popular);
+      sessionStorage.setItem("popularTours", JSON.stringify(popular));
       
       console.log('Tours cached successfully:', data.length, 'tours,', popular.length, 'popular');
     } catch (err) {

@@ -22,6 +22,24 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'allura';
+  src: url('/assets/fonts/allura.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'canletter';
+  src: url('/assets/fonts/canletter.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'sticky';
+  src: url('/assets/fonts/sticky.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 .hangyaboly-text {
   font-family: Hangyaboly, sans-serif;
 }
@@ -198,7 +216,7 @@ html {
   color: var(--white);
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  padding-bottom: 170px;
+  padding-bottom: 150px;
 }
 
 .carousel-slide.active {
@@ -216,11 +234,11 @@ html {
 }
 
 .carousel-main-heading {
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 2.2rem;
+  font-weight: 600;
   margin-bottom: 0.3rem;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-  font-family: 'SpecialElite', sans-serif;
+  font-family: sticky, sans-serif;
  
   line-height: 1.1;
   letter-spacing: 1px;
@@ -229,14 +247,14 @@ html {
 }
 
 .carousel-sub-heading {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 400;
   margin-bottom: 0.8rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  font-family: 'Playfair Display', serif;
+  font-family: allura, serif;
   line-height: 1.2;
   color: var(--white);
-  opacity: 0.95;
+  opacity: 0.;
 }
 
 .carousel-subtitle {
@@ -591,14 +609,15 @@ html {
 
 .tour-badge {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: .3rem;
+  right: .5rem;
   background: var(--primary-color);
   color: var(--white);
-  padding: 0.5rem 1rem;
+  padding: 0.3rem .6rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
+ 
 }
 
 .tour-info {

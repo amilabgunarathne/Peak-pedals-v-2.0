@@ -32,11 +32,11 @@ const Home: React.FC = () => {
 
     return () => observer.disconnect();
 
-       if (popularTours.length === 0) {
-      console.log('empty');
-      fetchTours();
+    //    if (popularTours.length === 0) {
+    //   console.log('empty');
+    //   fetchTours();
      
-    }
+    // }
   }, [popularTours, fetchTours]);
 
   // Data fetching is now handled by TourContext
